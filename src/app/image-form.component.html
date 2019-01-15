@@ -1,0 +1,19 @@
+<form [formGroup]="imageForm" (ngSubmit)="onSubmit()">
+    <mat-form-field >
+      <input matInput 
+            placeholder="Nombre" 
+            formControlName=name>
+    </mat-form-field>
+
+        <input
+            type="file"
+            id="file"
+            placeholder="File"
+            (change)="onFileChange($event)"
+            #fileInput 
+            formControlName="file">
+    <img *ngIf="image" id="thumbnail" title="thumb" src={{image}} class="thumbnail"/>
+    <p></p>   
+    <button mat-raised-button color="primary" type="submit" [disabled]="!imageForm.valid">Enviar</button>
+</form>
+  
