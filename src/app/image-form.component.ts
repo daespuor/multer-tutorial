@@ -3,6 +3,7 @@ import {FormGroup, FormControl, Validators} from '@angular/forms';
 import {MatSnackBar} from '@angular/material';
 import {ImageErrorComponent} from './image-error.component';
 import {ImageService} from './image.service';
+import {Router} from '@angular/router';
 @Component({
     selector:"app-image-form",
     templateUrl:"./image-form.component.html",
@@ -16,8 +17,11 @@ import {ImageService} from './image.service';
 export class ImageFormComponent implements OnInit{
     imageForm:FormGroup;
     image:any;
+    file:any;
 
-    constructor(public snackBar:MatSnackBar, private imageService:ImageService){}
+    constructor(public snackBar:MatSnackBar, 
+        private imageService:ImageService,
+        private router:Router){}
 
     ngOnInit(){
         this.imageForm=new FormGroup({
@@ -35,6 +39,7 @@ export class ImageFormComponent implements OnInit{
                 reader.onload=function load(){
                     this.image=reader.result; //Asignar al thumbnail
                 }.bind(this);
+                this.file=file;
             }else{
                 this.snackBar.openFromComponent(ImageErrorComponent, {//Muestra el error
                     duration: 500,
@@ -46,9 +51,12 @@ export class ImageFormComponent implements OnInit{
     onSubmit(){
         const form=this.imageForm;
         if(form.valid){//Verifica que el formulario sea válido y pasa parámetros
-            this.imageService.addPicture(form.value.name,form.value.file)
+            this.imageService.addPicture(form.value.name,this.file)
             .subscribe(
-                data=>console.log,
+                (data:any)=>{
+                    console.log(data);
+                    this.router.navigate([`/show/${data.file.filename}`]);
+                },
                 err=>console.log
             )
         }

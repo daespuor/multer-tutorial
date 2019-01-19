@@ -7,21 +7,24 @@ import { AppComponent } from './app.component';
 import {MaterialModule} from './material.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-
+import {ShowImageComponent} from './show-image.component';
+import {RouterImage} from './app.routes.module';
 import 'hammerjs';
 
 @NgModule({
   declarations: [
     AppComponent,
     ImageErrorComponent,
-    ImageFormComponent
+    ImageFormComponent,
+    ShowImageComponent
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     MaterialModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    RouterImage
   ],
   providers: [],
   bootstrap: [AppComponent]
