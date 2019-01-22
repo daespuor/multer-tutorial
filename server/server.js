@@ -8,7 +8,7 @@ const app= express();
 const PORT=process.env.PORT || 3000;
 const storage=multer.diskStorage({
     destination:function (req,file,cb){//Indica la carpeta de destino
-        cb(null,path.join(__dirname,'/public/uploads'));
+        cb(null,path.join(__dirname,'/uploads'));
     },
     filename:function(req,file,cb){//Indica el nombre del archivo
         cb(null,`${file.fieldname}-${Date.now()}.${file.mimetype.split('/')[1]}`);
@@ -25,6 +25,7 @@ app.use((req,res,next)=>{
     next();
 });
 app.use(express.static(path.join(__dirname,'/public')));//Directorio para archivos staticos
+app.use('/uploads',express.static(path.join(__dirname,'/uploads')));//Directorio de imagenes
 
 app.post('/picture',uploader.single('file'),(req,res)=>{
     const {file,body}=req;//req.file existe gracias al middleware de multer
