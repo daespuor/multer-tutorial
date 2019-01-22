@@ -24,7 +24,7 @@ app.use((req,res,next)=>{
     res.setHeader('Access-Control-Allow-Headers','Content-Type, Accept');
     next();
 });
-app.use(express.static(path.join(__dirname,'/public')));
+app.use(express.static(path.join(__dirname,'/public')));//Directorio para archivos staticos
 
 app.post('/picture',uploader.single('file'),(req,res)=>{
     const {file,body}=req;//req.file existe gracias al middleware de multer
