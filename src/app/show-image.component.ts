@@ -12,7 +12,7 @@ import {ActivatedRoute} from '@angular/router';
 export class ShowImageComponent implements OnInit{
     filename:string;
     constructor(private router:ActivatedRoute){
-        this.filename='http://localhost:3000/uploads/';
+        this.filename='http://multer-tuto.herokuapp.com/uploads/';
     }
     ngOnInit(){
         this.router.params.subscribe((params)=>{

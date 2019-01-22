@@ -5,7 +5,7 @@ const bodyParser= require('body-parser');
 const multer = require('multer');
 const path=require('path');
 const app= express();
-const PORT=3000;
+const PORT=process.env.PORT || 3000;
 const storage=multer.diskStorage({
     destination:function (req,file,cb){//Indica la carpeta de destino
         cb(null,path.join(__dirname,'/public/uploads'));
@@ -25,10 +25,6 @@ app.use((req,res,next)=>{
     next();
 });
 app.use(express.static(path.join(__dirname,'/public')));
-
-app.get('/',(req,res)=>{
-    res.send('Hello World');
-});
 
 app.post('/picture',uploader.single('file'),(req,res)=>{
     const {file,body}=req;//req.file existe gracias al middleware de multer

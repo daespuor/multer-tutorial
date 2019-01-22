@@ -3,12 +3,14 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "start:client": "ng serve",
+    "start":"node ./server/server.js",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "start-dev": "nodemon ./server/server.js"
+    "start-dev": "nodemon ./server/server.js",
+    "postinstall": "ng build --configuration=production --output-path ./server/public"
   },
   "private": true,
   "dependencies": {

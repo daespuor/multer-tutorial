@@ -9,7 +9,7 @@ export class ImageService{
     api:string;
 
     constructor(private http:HttpClient){
-        this.api='http://localhost:3000/picture';
+        this.api='http://multer-tuto.herokuapp.com/picture';
     }
 
     addPicture(name:string,file:File):Observable<Object>{
